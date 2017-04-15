@@ -106,7 +106,7 @@ ax3.plot(x, y3, 'g-')
 
 The gradients of the respective activation functions can be graphed similarly.
 
-![png](output_4_1.png)
+![png](images/output_4_1.png)
 
 
 ```python
