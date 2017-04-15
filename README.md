@@ -1,7 +1,6 @@
-
 ## Tutorial on Backpropagation
 
-
+Start off by importing the required packages. 
 ```python
 %matplotlib inline
 import numpy as np
@@ -10,7 +9,12 @@ from random import random
 from matplotlib import pyplot as plt
 plt.style.use('seaborn-pastel')
 ```
-
+### Neural Networks - Activation Function
+The activation function is one of the most important parts of a Neural Network. It works by taking an input value, which might be a scalar or a vector (numpy array), and returns the output depending on whether the input has crossed a certain threshold. This threshold value is determined by the particular function used.  
+Typical activation functions used for Neural networks are:  
+- Sigmoid Function  
+- Hyperbolic Tangent Function
+- Rectified Linear Unit (ReLU)  
 
 ```python
 def actv_fn(x, fn='sigmoid', derivative=False):
@@ -69,16 +73,40 @@ ax3.axvline(0, linewidth=1, color='black')
 ax3.plot(x, y3, 'g-')
 ```
 
-
-
-
-    [<matplotlib.lines.Line2D at 0x7f49438a5190>]
-
-
-
+The training process of a Neural network involves two steps, a forward pass and a backward pass, both of which use the activation function. In the backward pass, or backpropagation step, we are more concerned with the derivative of the activation function, the reason for which is explained later in this tutorial. Taking the derivative of any function at a point simply means finding the slope of the function at that point. It is easier to visualize the derivative when the function is in the form of a graph, as shown below.  
 
 ![png](images/output_3_1.png)
 
+
+```python
+x = np.arange(-5, 5, 0.1)
+fig = plt.figure(figsize=(24, 4))
+
+y1 = [actv_fn(i, fn='sigmoid') for i in x]
+y1 = [actv_fn(i, fn='sigmoid', derivative=True) for i in y1]
+ax1 = fig.add_subplot(131)
+ax1.set_title('Derivative of Sigmoid Function')
+ax1.axvline(0, linewidth=1, color='black')
+ax1.plot(x, y1, 'b-')
+
+y2 = [actv_fn(i, fn='relu') for i in x]
+y2 = [actv_fn(i, fn='relu', derivative=True) for i in y2]
+ax2 = fig.add_subplot(132)
+ax2.set_title('Derivative of ReLU Function')
+ax2.axvline(0, linewidth=1, color='black')
+ax2.plot(x, y2, 'r-')
+
+y3 = [actv_fn(i, fn='tanh') for i in x]
+y3 = [actv_fn(i, fn='tanh', derivative=True) for i in y3]
+ax3 = fig.add_subplot(133)
+ax3.set_title('Derivative of TanH Function')
+ax3.axvline(0, linewidth=1, color='black')
+ax3.plot(x, y3, 'g-')
+```
+
+The gradients of the respective activation functions can be graphed similarly.
+
+![png](output_4_1.png)
 
 
 ```python
